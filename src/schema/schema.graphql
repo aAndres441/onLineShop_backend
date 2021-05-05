@@ -1,0 +1,39 @@
+# "comentario una linea"
+# """ 
+# comentario
+# multi-linea
+# """"
+"""
+* "para que el valor de c/contenido no sea nulo uso ! y que no sea nulo el conjunto lista !"
+* "Lista usuarios de la BD (Clients/Admins)"
+* Definicion del los tipos de raiz query
+"""
+
+type Query {    
+    users:[User!]!
+}
+
+ """
+ Lista usuarios de la BD (Clients/Admins)
+ * Especificaremos la info del usuario.
+ Datos escalares.
+ email = usuario de la BD
+ fecha de nacim y registro en formato ISO
+ """
+
+type User {
+    # "Identificador unico"
+    id: ID!
+    #"Nombre de pila"
+    name: String!
+    #"Apellido/s"
+    lastname:String!
+    #"Correo de BD"
+    email:String!
+    #"Cotraseña de la cuenta"
+    password:String!
+    #"Fecha registro en BD"
+    registerDate: String!
+    #"Fecha nacim.- solo > 18 años"
+    birthday: String!
+}

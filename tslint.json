@@ -1,0 +1,11 @@
+{
+    "rules":{
+        "quotemark": [true, "single"],
+        "semicolon": true,
+        "no-any":true,
+        "triple-equals": true,
+        "interface-name": [true, "always-prefix"],
+        "no-empty-interface":true,
+        "curly": true
+    }
+}
