@@ -20,12 +20,13 @@ async function init() {
     app.use(compression());
 
    /*  const database = new Database();
-    const db = await database.init();  */
+    const db = await database.init(); 
+    const context = db; */
 
     const server = new ApolloServer({
         schema,
         introspection: true,
-        /* context: { db } */
+        /* context: { context } */
     });
 
     server.applyMiddleware({app});
