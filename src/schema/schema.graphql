@@ -5,13 +5,37 @@
 # """"
 """
 * "para que el valor de c/contenido no sea nulo uso ! y que no sea nulo el conjunto lista !"
-* "Lista usuarios de la BD (Clients/Admins)"
 * Definicion del los tipos de raiz query
 """
 
 type Query {    
+   #""" Lista usuarios de la BD (Clients/Admins)"""
+    users:ResultUsers
+}
+
+"""opciones de  crud de elementos de BD"""
+
+type Mutation {
+    register(user:UserInput!): User
+}
+
+#interface para especificar prop obligatorias en las respuestas
+interface Result {
+    #estado de la query
+    status:Boolean!
+    #mensaje para dar feedback
+    message: String!
+}
+
+type ResultUsers implements Result{
+     #estado de la query
+    status:Boolean!
+    #mensaje para dar feedback
+    message: String!
+    # """ Lista usuarios de la BD (Clients/Admins)"""
     users:[User!]!
 }
+
  """
  Lista usuarios de la BD (Clients/Admins)
  * Especificaremos la info del usuario.
@@ -21,6 +45,7 @@ type Query {
  """
 
 type User {
+    #todos los casos con ! seran obligatorios
     # "Identificador unico"
     id: ID!
     #"Nombre de pila"
@@ -35,4 +60,30 @@ type User {
     registerDate: String!
     #"Fecha nacim.- solo > 18 años"
     birthday: String!
+    #"""Permisos de Usu"""
+    role: Role!
+}
+
+#Input para añadir datos del usu en el registro
+input UserInput {    
+   #todos los casos con ! seran obligatorios
+    #"Identificador en este caso no obligatorio porque puede ser para crear o acualizar o borrar"
+    id: ID
+    #"Nombre de pila"
+    name: String!
+    #"Apellido/s"
+    lastname:String!
+    #"Correo de BD"
+    email:String!
+    #"Cotraseña de la cuenta"
+    password:String!
+    #"Fecha nacim.- solo > 18 años"
+    birthday: String!
+    #"""Permisos de Usu"""
+    role: Role=CLIENT
+}
+
+enum Role {
+    CLIENT
+    ADMIN
 }

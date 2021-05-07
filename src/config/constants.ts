@@ -11,3 +11,7 @@ if(process.env.NODE_ENV !== 'production'){
 }
 
 export const SECRET_KEY = process.env.SECRET || 'le asigno la palabra secreta si n o tengo variables de entorno '
+
+export enum COLLECTIONS {
+        USERS='users' 
+}

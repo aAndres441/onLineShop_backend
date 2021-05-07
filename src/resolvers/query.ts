@@ -1,26 +1,32 @@
 /* import { IResolvers } from '@graphql-tools/utils'; */
 
 import { IResolvers } from 'graphql-tools';
+import { COLLECTIONS } from '../config/constants';
 
+
+/* estos resolves seran para las querys en Playground */
 const resolversQuery: IResolvers = {
     Query: {
-        users(root, args, context, info) {
-            console.log(root);
+        async users(_, __, { db }) {
+            /* console.log(root);
             console.log(args);
             console.log(context);
-            console.log(info);
-            
-            return [
-                {
-                    id: 1,
-                    name: 'Andres',
-                    lastname: 'Arias',
-                    email: '',
-                    password: '',
-                    registerDate: '',
-                    birthday: ''
-                }
-            ];
+            console.log(info); */
+            try {
+                return {
+                    status: true,
+                    message: 'Lista de usus cargado correctamente!',
+                    users: await db.collection(COLLECTIONS.USERS).find().toArray()
+                };
+            } catch (error) {
+                console.log(error);
+                return { 
+                    status:false,
+                    message: 'Error al catgar Usuarios. Comprueba!',
+                    users: []               
+                };
+            }
+
         }
     }
 };

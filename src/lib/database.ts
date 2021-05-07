@@ -24,6 +24,7 @@ class Database {
             console.log('NO conecta');
             
         }
+        return db;
     }
 }
 export default Database;

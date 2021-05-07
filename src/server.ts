@@ -19,14 +19,16 @@ async function init() {
     app.use(cors());
     app.use(compression());
 
-   /*  const database = new Database();
+    const database = new Database();
     const db = await database.init(); 
-    const context = db; */
+    console.log('Inicia DB');
+    
+    const context = {db};
 
     const server = new ApolloServer({
         schema,
         introspection: true,
-        /* context: { context } */
+        context
     });
 
     server.applyMiddleware({app});
@@ -40,7 +42,7 @@ async function init() {
         {
             port: PORT,
         },
-        () => console.log(`http://localhost:${PORT} API`) 
+        () => console.log('Server.ts: createServer', `http://localhost:${PORT} API`) 
 
         //abro navegador con este puerto.OJO poner comillas invertidas   
     );
