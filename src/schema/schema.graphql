@@ -9,14 +9,25 @@
 """
 
 type Query {    
-   #""" Lista usuarios de la BD (Clients/Admins)"""
+    #""" Lista usuarios de la BD (Clients/Admins)"""
+
     users:ResultUsers
+    
+    #"para iniciar sesion de usuario (tambien podria ser input con estos parametros)"
+    #"""login(data:loginInitUsu): ResultLogin"""
+
+    login(email: String!, password:String!): ResultLogin
+
+    #//autenticamos mediante token
+    me: ResultUser
+   
 }
 
 """opciones de  crud de elementos de BD"""
 
 type Mutation {
-    register(user:UserInput!): User
+    #registra UserInput en el mutation
+    register(user:UserInput!): ResultUser 
 }
 
 #interface para especificar prop obligatorias en las respuestas
@@ -27,13 +38,26 @@ interface Result {
     message: String!
 }
 
+#"""**************************************************** ****
+
 type ResultUsers implements Result{
+    #seran todosloa param a devolver
      #estado de la query
     status:Boolean!
     #mensaje para dar feedback
     message: String!
     # """ Lista usuarios de la BD (Clients/Admins)"""
     users:[User!]!
+}
+
+type ResultUser implements Result{
+    #seran todosloa param a devolver
+     #estado de la query
+    status:Boolean!
+    #mensaje para dar feedback
+    message: String!
+    # """ Info del usuario no duplicado puede ser nulo"""
+    user:User
 }
 
  """
@@ -86,4 +110,22 @@ input UserInput {
 enum Role {
     CLIENT
     ADMIN
+}
+
+""" /**********  LOGIN  *******************/ """
+
+input loginInitUsu { 
+    "no lo estoy usando pues los tomo por separado, por mi decicion"
+ email:String!
+ password:String!
+}
+
+type ResultLogin implements Result{
+    #resultado de todo lo que nos devuelve
+     #estado de la query
+    status:Boolean!
+    #mensaje para dar feedback
+    message: String!
+    # """ Info del TOKEN del usu logueado, sera un solo objeto y sin! pues podria ser la respuesta nula"""
+    token: String
 }

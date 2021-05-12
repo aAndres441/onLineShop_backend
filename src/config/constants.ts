@@ -10,8 +10,26 @@ if(process.env.NODE_ENV !== 'production'){
     const env = environment;
 }
 
-export const SECRET_KEY = process.env.SECRET || 'le asigno la palabra secreta si n o tengo variables de entorno '
+/* las variables de entorno estan en .env, en caso de no tener .env, usaria el string */
+
+export const SECRET_KEY = process.env.SECRET || 'EstaEsLaPalabraSecretaPorSiNoTengoVariablesPuntoEnv';
 
 export enum COLLECTIONS {
-        USERS='users' 
+    USERS='users' ,
+    CUSTOMER='client',
+    PRODS='products'
+}
+
+export enum MESSAGES {
+    TOKEN_VERIFICATION_FAILED = 'Token no valido, debe iniciar sesion de nuevo'
+}
+
+/* nuestro tiempo caducidad H=horas, D=dias, M= minutos*/
+export enum EXPIRETIME {
+    H1 = 60*60,
+    H12 = 12*H1,
+    H24 = 24*H1,
+    M15 = H1/4,
+    M5 = H1/30,
+    D3 = H24*2
 }

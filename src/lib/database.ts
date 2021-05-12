@@ -21,9 +21,9 @@ class Database {
             console.log(`NAME DB: ${chalk.greenBright(db.databaseName)}`);            
         }
         else{
-            console.log('NO conecta');
-            
+            console.log('NO conecta');            
         }
+        
         return db;
     }
 }

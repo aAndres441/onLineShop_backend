@@ -8,9 +8,11 @@ import { ApolloServer } from 'apollo-server-express';
 import schema from './schema';
 import expressPlayground from 'graphql-playground-middleware-express';
 import Database from './lib/database';
+import { IContext } from './interfaces/context';
 
 if(process.env.NODE_ENV !== 'production'){
     const env = environments;
+    console.log('----Desde server hacia .env ----- ');    
     console.log(env);    
 }
 
@@ -21,9 +23,15 @@ async function init() {
 
     const database = new Database();
     const db = await database.init(); 
+
     console.log('Inicia DB');
     
-    const context = {db};
+    //const context = {db};  usamos el de abajo por cambios al prgresar curso con token en query me:
+
+    const context = async ({req, connection}: IContext)=>{ /*si es definido va a heders sino es subscription de connection  */
+        const token = (req) ? req.headers.authorization : connection.authorization;
+        return {db, token};
+    };
 
     const server = new ApolloServer({
         schema,
