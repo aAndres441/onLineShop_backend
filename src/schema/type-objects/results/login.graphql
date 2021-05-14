@@ -1,0 +1,15 @@
+input loginInitUsu { 
+    #seran"no lo estoy usando pues los tomo por separado, por mi decicion"
+ email:String!
+ password:String!
+}
+
+type ResultLogin implements Result{
+    #resultado de todo lo que nos devuelve
+     #estado de la query
+    status:Boolean!
+    #mensaje para dar feedback
+    message: String!
+    # """ Info del TOKEN del usu logueado, sera un solo objeto y sin! pues podria ser la respuesta nula"""
+    token: String
+}

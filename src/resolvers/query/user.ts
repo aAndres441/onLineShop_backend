@@ -1,14 +1,15 @@
 /* import { IResolvers } from '@graphql-tools/utils'; */
 
 import { IResolvers } from 'graphql-tools';
-import { COLLECTIONS, EXPIRETIME, MESSAGES } from '../config/constants';
-import JWT from '../lib/jwt';
+import { COLLECTIONS, EXPIRETIME, MESSAGES } from './../../config/constants';
+import JWT from './../../lib/jwt';
 import bcrypt from 'bcrypt';
-import jwt from '../lib/jwt';
+import jwt from './../../lib/jwt';
+import { findOneElement, getElements } from '../../lib/db-operations';
 
 
 /* estos resolves seran para las querys en Playground */
-const resolversQuery: IResolvers = {
+const resolversUserQuery: IResolvers = {
     Query: {
         async users(_, __, { db }) {
             /* console.log(root);
@@ -19,10 +20,7 @@ const resolversQuery: IResolvers = {
                 return {
                     status: true,
                     message: 'Lista de usus cargado correctamente!',
-                    users: await db
-                        .collection(COLLECTIONS.USERS)
-                        .find()
-                        .toArray(),
+                    users: await getElements(db,COLLECTIONS.USERS,{})
                 };
             } catch (error) {
                 console.log(error);
@@ -38,9 +36,7 @@ const resolversQuery: IResolvers = {
         async login(_, { email, password }, { db }) {
             try {
                 //verify email para TOKEN 
-                const user = await db.
-                    collection(COLLECTIONS.USERS)
-                    .findOne({ email });
+                const user = await findOneElement(db,COLLECTIONS.USERS,{email: email});
                 if (!user) {
                     return {
                         status: true,
@@ -64,12 +60,6 @@ const resolversQuery: IResolvers = {
                    } */
 
                 // verifica credenciales del usu para el login
-                //saco esta consulta para agregar el check de token hash
-                /* const user = await db
-                    .collection(COLLECTIONS.USERS)
-                    .findOne({ email, password }); */
-
-                //bcrypt.compareSync(myPassword, hash); // true
 
                 const passwordCheck = bcrypt.compareSync(password, user.password);
 
@@ -113,7 +103,7 @@ const resolversQuery: IResolvers = {
                    user:null
                };
            }
-            return{
+            return{  //retorna el me de tipo ResultUser de schema
                 status: true,
                 message:'Usuario autenticado mediante el token',
                 user:Object.values(info)[0]
@@ -123,7 +113,7 @@ const resolversQuery: IResolvers = {
     }
 };
 
-export default resolversQuery;
+export default resolversUserQuery;
 
 
 /* lo veo desde graphqql

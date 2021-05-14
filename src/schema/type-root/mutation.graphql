@@ -1,0 +1,6 @@
+"""opciones de  crud de elementos de BD"""
+
+type Mutation {
+    #registra UserInput en el mutation
+    register(user:UserInput!): ResultUser 
+}

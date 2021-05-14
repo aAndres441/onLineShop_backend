@@ -1,0 +1,27 @@
+"""
+ Lista usuarios de la BD (Clients/Admins)
+ * Especificaremos la info del usuario.
+ Datos escalares.
+ email = usuario de la BD
+ fecha de nacim y registro en formato ISO
+ """
+
+type User {
+    #todos los casos con ! seran obligatorios
+    # "Identificador unico"
+    id: ID!
+    #"Nombre de pila"
+    name: String!
+    #"Apellido/s"
+    lastname:String!
+    #"Correo de BD"
+    email:String!
+    #"Cotraseña de la cuenta"
+    password:String!
+    #"Fecha registro en BD"
+    registerDate: String!
+    #"Fecha nacim.- solo > 18 años"
+    birthday: String!
+    #"""Permisos de Usu"""
+    role: Role!
+}

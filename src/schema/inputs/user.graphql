@@ -1,0 +1,18 @@
+#Input para añadir datos del usu en el registro
+input UserInput {    
+   #todos los casos con ! seran obligatorios
+    #"Identificador en este caso no obligatorio porque puede ser para crear o acualizar o borrar"
+    id: ID
+    #"Nombre de pila"
+    name: String!
+    #"Apellido/s"
+    lastname:String!
+    #"Correo de BD"
+    email:String!
+    #"Cotraseña de la cuenta"
+    password:String!
+    #"Fecha nacim.- solo > 18 años"
+    birthday: String!
+    #"""Permisos de Usu"""
+    role: Role=CLIENT
+}

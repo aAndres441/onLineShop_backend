@@ -1,0 +1,7 @@
+#interface para especificar prop obligatorias en las respuestas
+interface Result {
+    #estado de la query
+    status:Boolean!
+    #mensaje para dar feedback
+    message: String!
+}

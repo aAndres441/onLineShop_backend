@@ -1,0 +1,10 @@
+
+type ResultUser implements Result{
+    #seran todosloa param a devolver
+     #estado de la query
+    status:Boolean!
+    #mensaje para dar feedback
+    message: String!
+    # """ Info del usuario no duplicado puede ser nulo"""
+    user:User
+}

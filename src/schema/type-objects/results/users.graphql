@@ -1,0 +1,9 @@
+type ResultUsers implements Result{
+    #seran todosloa param a devolver
+     #estado de la query
+    status:Boolean!
+    #mensaje para dar feedback
+    message: String!
+    # """ Lista usuarios de la BD (Clients/Admins)"""
+    users:[User!]!
+}

@@ -1,0 +1,22 @@
+"""
+* "para que el valor de c/contenido no sea nulo uso ! y que no sea nulo el conjunto lista !"
+* Definicion del los tipos de raiz query
+"""
+
+type Query {    
+    #""" Lista usuarios de la BD (Clients/Admins)"""
+
+    users:ResultUsers
+    
+    #"para iniciar sesion de usuario (tambien podria ser input con estos parametros)"
+    #"""login(data:loginInitUsu): ResultLogin"""
+
+    login(email: String!, password:String!): ResultLogin
+
+    #//autenticamos mediante token
+    me: ResultUser
+
+    "Mostrar lista de productos" 
+    products:Boolean
+   
+}
